@@ -95,8 +95,6 @@ function MovieInformation() {
             borderRadius: '20px',
             boxShadow: '0.5em 1em 1em rgb(64, 64, 70)',
             width: '80%',
-            margin: '0 auto !important',
-            // height: '350px',
             marginBottom: '30px',
             [theme.breakpoints.down('md')]: {
               width: '50%',
@@ -129,11 +127,12 @@ function MovieInformation() {
           <Box display="flex" align="center">
             <Rating readOnly value={data.vote_average / 2} />
             <Typography gutterBottom variant="subtitle1" style={{ marginLeft: '10px' }}>
-              {data?.vote_average} / 10
+              {parseFloat(data?.vote_average.toFixed(2))} / 10
             </Typography>
           </Box>
           <Typography gutterBottom variant="h6" align="center">
-            {data?.runtime}min | {data.release_date}
+            {data?.runtime}min | {data?.spoken_languages.length > 0 ? data?.spoken_languages[0].name : ''} |{' '}
+            {data?.release_date}
           </Typography>
         </Grid>
         <Grid
@@ -148,6 +147,7 @@ function MovieInformation() {
           {data?.genres?.map((genre) => (
             <Box
               key={genre.name}
+              component={Link}
               to="/"
               onClick={() => dispatch(selectGenreOrCategory(genre.id))}
               sx={{
