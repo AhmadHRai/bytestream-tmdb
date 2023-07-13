@@ -68,7 +68,11 @@ function Sidebar({ setMobileOpen }) {
         <ListSubheader>Genres</ListSubheader>
         {isFetching ? (
           <Box display="flex" justifyContent="center">
-            <CircularProgress />
+            <CircularProgress
+              sx={{
+                color: '#ff0072',
+              }}
+            />
           </Box>
         ) : (
           data.genres.map(({ name, id }) => (
