@@ -32,11 +32,7 @@ function Movie({ movie, i }) {
         >
           <Box
             component="img"
-            src={
-              movie.poster_path
-                ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
-                : 'https://placebear.com/200/300' // just a place holder
-            }
+            src={movie.poster_path ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}` : '/no-img.png'}
             alt={movie.title}
             sx={{
               borderRadius: '20px',
