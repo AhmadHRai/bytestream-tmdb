@@ -6,10 +6,21 @@ import { Actors, MovieInformation, Movies, NavBar, Profile } from './index';
 
 function App() {
   return (
-    <div>
+    <div
+      style={{
+        display: 'flex',
+        height: '100%',
+      }}
+    >
       <CssBaseline />
       <NavBar />
-      <main>
+      <main
+        style={{
+          flexGrow: '1',
+          padding: '2rem',
+        }}
+      >
+        <div style={{ height: '70px' }} />
         <Routes>
           <Route exact path="/movie/:id" element={<MovieInformation />} />
           <Route exact path="/actors/:id" element={<Actors />} />
