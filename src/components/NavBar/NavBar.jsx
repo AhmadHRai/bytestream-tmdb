@@ -18,7 +18,7 @@ function NavBar() {
             height: '80px',
             display: 'flex',
             justifyContent: 'space-between',
-            marginLeft: { sm: 240 },
+            marginLeft: { sm: '240px' },
             flexWrap: { xs: 'wrap', sm: 'nowrap' },
           }}
         >
