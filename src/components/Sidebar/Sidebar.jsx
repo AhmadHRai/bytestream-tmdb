@@ -29,7 +29,12 @@ function Sidebar({ setMobileOpen }) {
   const { data, isFetching } = useGetGenresQuery();
 
   const dispatch = useDispatch();
+  const selectedGenreOrCategory = useSelector((state) => state.currentGenreOrCategory.genreIdOrCategoryName);
   // const { genreIdOrCategoryName } = useSelector((state) => state.currentGenreOrCategory);
+
+  const handleSelect = (value) => {
+    dispatch(selectGenreOrCategory(value));
+  };
 
   return (
     <>
@@ -45,11 +50,7 @@ function Sidebar({ setMobileOpen }) {
         <ListSubheader>Categories</ListSubheader>
         {categories.map(({ label, value }) => (
           <Link key={value} style={{ color: theme.palette.text.primary, textDecoration: 'none' }} to="/">
-            <ListItemButton
-              onClick={() => {
-                dispatch(selectGenreOrCategory(value));
-              }}
-            >
+            <ListItemButton selected={selectedGenreOrCategory === value} onClick={() => handleSelect(value)}>
               <ListItemIcon>
                 <img
                   src={genreIcons[label.toLowerCase()]}
@@ -72,11 +73,7 @@ function Sidebar({ setMobileOpen }) {
         ) : (
           data.genres.map(({ name, id }) => (
             <Link key={name} style={{ color: theme.palette.text.primary, textDecoration: 'none' }} to="/">
-              <ListItemButton
-                onClick={() => {
-                  dispatch(selectGenreOrCategory(id));
-                }}
-              >
+              <ListItemButton selected={selectedGenreOrCategory === id} onClick={() => handleSelect(id)}>
                 <ListItemIcon>
                   <img
                     src={genreIcons[name.toLowerCase()]}
