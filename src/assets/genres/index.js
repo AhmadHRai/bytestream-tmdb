@@ -21,6 +21,7 @@ import western from './western.png';
 import popular from './popular.png';
 import topRated from './top rated.png';
 import upcoming from './upcoming.png';
+import trending from './trending.png';
 
 export default {
   action,
@@ -45,4 +46,5 @@ export default {
   popular,
   'top rated': topRated,
   upcoming,
+  'now playing': trending,
 };

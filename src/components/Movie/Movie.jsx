@@ -41,7 +41,7 @@ function Movie({ movie, i }) {
             sx={{
               borderRadius: '20px',
               height: '300px',
-              marginBottom: '10px',
+              marginBottom: '2px',
               transition: 'transform 0.3s ease-in-out', // Added this line for smooth transition
               '&:hover': {
                 transform: 'scale(1.05)',
@@ -55,7 +55,7 @@ function Movie({ movie, i }) {
               width: '230px',
               whiteSpace: 'nowrap',
               overflow: 'hidden',
-              marginTop: '10px',
+              marginTop: '2px',
               marginBottom: 0,
               textAlign: 'center',
             }}
