@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Box, CircularProgress, useMediaQuery, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 
+import { ArrowBack } from '@mui/icons-material';
+import { Button } from '@mui/base';
+import { Navigate } from 'react-router';
 import { useGetMoviesQuery } from '../../services/TMDB';
 import { MovieList } from '../index';
 import { selectGenreOrCategory } from '../../features/currentGenreOrCategory';
@@ -41,7 +44,15 @@ function Movies() {
     );
   }
 
-  if (error) return 'An error has occured.';
+  if (error) {
+    return (
+      <Box display="flex" alignItems="center" justifyContent="center">
+        <Button startIcon={<ArrowBack />} onClick={() => Navigate(-1)} color="primary">
+          Go Back
+        </Button>
+      </Box>
+    );
+  }
 
   return (
     <div>

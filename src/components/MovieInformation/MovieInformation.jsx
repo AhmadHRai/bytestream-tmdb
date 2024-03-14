@@ -20,7 +20,7 @@ import {
   Remove,
   ArrowBack,
 } from '@mui/icons-material';
-import { Link, useParams } from 'react-router-dom';
+import { Link, Navigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { useTheme } from '@mui/material/styles';
@@ -62,7 +62,9 @@ function MovieInformation() {
   if (error) {
     return (
       <Box display="flex" alignItems="center" justifyContent="center">
-        <Link to="/">Something went wrong - Go back.</Link>
+        <Button startIcon={<ArrowBack />} onClick={() => Navigate(-1)} color="primary">
+          Go Back
+        </Button>
       </Box>
     );
   }
@@ -241,7 +243,7 @@ function MovieInformation() {
                 },
               }}
             >
-              <ButtonGroup size="medium" variant="outlined">
+              <ButtonGroup size="small" variant="outlined">
                 <Button target="_blank" rel="noopener noreferrer" href={data?.homepage} endIcon={<Language />}>
                   Website
                 </Button>
@@ -271,7 +273,7 @@ function MovieInformation() {
                 },
               }}
             >
-              <ButtonGroup size="medium" variant="outlined">
+              <ButtonGroup size="small" variant="outlined">
                 <Button onClick={addToFavorites} endIcon={isMovieFavorited ? <FavoriteBorderOutlined /> : <Favorite />}>
                   {isMovieFavorited ? 'Unfavorite' : 'Favorite'}
                 </Button>
