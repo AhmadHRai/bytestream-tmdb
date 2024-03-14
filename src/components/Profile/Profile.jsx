@@ -13,8 +13,6 @@ function Profile() {
 
   const favouriteMovies = []; // Todo: add movie to favourites from movie information
 
-  console.log(user);
-
   return (
     <Box>
       <Box display="flex" justifyContent="space-between">

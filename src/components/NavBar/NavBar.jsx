@@ -41,7 +41,7 @@ function NavBar() {
 
   return (
     <>
-      <AppBar position="fixed">
+      <AppBar position="fixed" sx={{ backgroundColor: '#ff0072' }}>
         <Toolbar
           sx={{
             height: '70px',

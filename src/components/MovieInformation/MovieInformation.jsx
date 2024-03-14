@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Modal,
   Typography,
@@ -41,12 +41,10 @@ function MovieInformation() {
     list: '/recommendations',
     movie_id: id,
   });
-  console.log('data=');
-  console.log(data);
-  console.log(recommendations);
 
   const isMovieFavorited = true;
   const isMovieWatchlisted = true;
+  const [open, setOpen] = useState(false);
 
   if (isFetching) {
     return (
@@ -243,7 +241,7 @@ function MovieInformation() {
                 },
               }}
             >
-              <ButtonGroup size="small" variant="outlined">
+              <ButtonGroup size="medium" variant="outlined">
                 <Button target="_blank" rel="noopener noreferrer" href={data?.homepage} endIcon={<Language />}>
                   Website
                 </Button>
@@ -255,7 +253,7 @@ function MovieInformation() {
                 >
                   IMDB
                 </Button>
-                <Button onClick={() => {}} href="#" endIcon={<Theaters />}>
+                <Button onClick={() => setOpen(true)} href="#" endIcon={<Theaters />}>
                   Trailer
                 </Button>
               </ButtonGroup>
@@ -273,7 +271,7 @@ function MovieInformation() {
                 },
               }}
             >
-              <ButtonGroup size="small" variant="outlined">
+              <ButtonGroup size="medium" variant="outlined">
                 <Button onClick={addToFavorites} endIcon={isMovieFavorited ? <FavoriteBorderOutlined /> : <Favorite />}>
                   {isMovieFavorited ? 'Unfavorite' : 'Favorite'}
                 </Button>
@@ -300,12 +298,41 @@ function MovieInformation() {
         <Typography variant="h3" gutterBottom align="center">
           You might also like
         </Typography>
-        {recommendations ? (
+        {recommendations?.results && recommendations?.results?.length > 0 ? (
           <MovieList movies={recommendations} numberOfMovies={12} />
         ) : (
-          <Box>Sorry, nothing was found.</Box>
+          <Box>
+            <Typography variant="h5" align="center">
+              Sorry, no recommendations was found for {data?.title}
+            </Typography>
+          </Box>
         )}
       </Box>
+      <Modal
+        closeAfterTransition
+        sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+        open={open}
+        onClose={() => setOpen(false)}
+      >
+        {data?.videos?.results?.length > 0 && (
+          <Box
+            component="iframe"
+            autoPlay
+            title="Trailer"
+            src={`https://www.youtube.com/embed/${data.videos.results[0].key}`}
+            allow="autoplay"
+            sx={{
+              border: 0,
+              width: '50%',
+              height: '50%',
+              [theme.breakpoints.down('sm')]: {
+                width: '90%',
+                height: '90%',
+              },
+            }}
+          />
+        )}
+      </Modal>
     </Grid>
   );
 }
