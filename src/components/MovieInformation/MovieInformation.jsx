@@ -81,7 +81,7 @@ function MovieInformation() {
         },
       }}
     >
-      <Grid item sm={12} lg={4}>
+      <Grid item sm={12} lg={4} align="center">
         <Box
           component="img"
           src={`https://image.tmdb.org/t/p/w500/${data?.poster_path}`}
@@ -90,12 +90,15 @@ function MovieInformation() {
             borderRadius: '20px',
             boxShadow: '0.5em 1em 1em rgb(64, 64, 70)',
             width: '80%',
-            marginBottom: '30px',
             [theme.breakpoints.down('md')]: {
+              margin: '0 auto !imporatant',
               width: '50%',
             },
             [theme.breakpoints.down('sm')]: {
+              margin: '0 auto !imporatant',
               width: '100%',
+              // height: '350px',
+              marginBottom: '30px',
             },
           }}
         />
@@ -168,7 +171,7 @@ function MovieInformation() {
             </Box>
           ))}
         </Grid>
-        <Typography variant="h5" gutterBottom style={{ marginTop: '10px' }}>
+        <Typography variant="h5" gutterBottom style={{ marginTop: '20px' }}>
           Overview
         </Typography>
         <Typography style={{ marginBottom: '2rem' }}>{data?.overview}</Typography>
