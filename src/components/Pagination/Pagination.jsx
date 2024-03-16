@@ -19,15 +19,21 @@ function Pagination({ currentPage, setPage, totalPages }) {
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-      <Button onClick={handlePrev} variant="contained" style={{ margin: '30px 2px' }} color="primary" type="button">
-        Prev
-      </Button>
-      <Typography variant="h4" sx={{ margin: '0 20px !important', color: theme.palette.text.primary }}>
-        {currentPage}
-      </Typography>
-      <Button onClick={handleNext} variant="contained" style={{ margin: '30px 2px' }} color="primary" type="button">
-        Next
-      </Button>
+      {currentPage !== 1 && (
+        <Button onClick={handlePrev} variant="contained" style={{ margin: '30px 2px' }} color="primary" type="button">
+          Prev
+        </Button>
+      )}
+      {totalPages !== 1 && (
+        <Typography variant="h4" sx={{ margin: '0 20px !important', color: theme.palette.text.primary }}>
+          {currentPage}
+        </Typography>
+      )}
+      {currentPage !== totalPages && (
+        <Button onClick={handleNext} variant="contained" style={{ margin: '30px 2px' }} color="primary" type="button">
+          Next
+        </Button>
+      )}
     </div>
   );
 }
