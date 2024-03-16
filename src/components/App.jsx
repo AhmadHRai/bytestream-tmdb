@@ -18,6 +18,7 @@ function App() {
         style={{
           flexGrow: '1',
           padding: '2rem',
+          width: '100%',
         }}
       >
         <div style={{ height: '70px' }} />
