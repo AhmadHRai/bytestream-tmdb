@@ -1,3 +1,9 @@
+/* For Firefox */
+html {
+  scrollbar-color: #ff4599 #ffb2d5; /* thumb color, track color */
+  scrollbar-width: thin; /* or 'auto' for the standard width */
+}
+
 ::-webkit-scrollbar {
   width: 7px;
 }
