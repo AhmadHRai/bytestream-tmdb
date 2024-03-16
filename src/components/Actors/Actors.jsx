@@ -1,27 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Button, CircularProgress, Grid, Typography } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ArrowBack } from '@mui/icons-material';
 
 import { useGetActorQuery, useGetMoviesByActorIdQuery } from '../../services/TMDB';
-import { MovieList } from '../index';
+import { MovieList, Pagination } from '../index';
 
 function Actors() {
   const navigate = useNavigate();
   const { id } = useParams();
   const { data, isFetching, error } = useGetActorQuery(id);
-  const page = 1;
+  const [page, setPage] = useState(1);
   const { data: movies } = useGetMoviesByActorIdQuery({ id, page });
 
   if (isFetching) {
     return (
       <Box display="flex" alignItems="center" justifyContent="center">
-        <CircularProgress
-          size="8rem"
-          sx={{
-            color: '#ff0072',
-          }}
-        />
+        <CircularProgress size="8rem" />
       </Box>
     );
   }
@@ -76,6 +71,7 @@ function Actors() {
           Movies
         </Typography>
         {movies && <MovieList movies={movies} numberOfMovies={12} />}
+        <Pagination currentPage={page} setPage={setPage} totalPages={movies?.total_pages} />
       </Box>
     </>
   );

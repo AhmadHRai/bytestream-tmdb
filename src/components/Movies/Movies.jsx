@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Box, CircularProgress, useMediaQuery, Typography } from '@mui/material';
+import { Box, CircularProgress, useMediaQuery, Typography, Button } from '@mui/material';
 import { useSelector } from 'react-redux';
 
 import { ArrowBack } from '@mui/icons-material';
-import { Button } from '@mui/base';
-import { Navigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import { useGetMoviesQuery } from '../../services/TMDB';
-import { MovieList } from '../index';
+import { MovieList, Pagination } from '../index';
 import { selectGenreOrCategory } from '../../features/currentGenreOrCategory';
 
 function Movies() {
+  const navigate = useNavigate();
+
   const [page, setPage] = useState(1);
   const { genreIdOrCategoryName, searchQuery } = useSelector((state) => state.currentGenreOrCategory);
   const { data, error, isFetching } = useGetMoviesQuery({
@@ -18,13 +19,15 @@ function Movies() {
     searchQuery,
   });
 
+  const lg = useMediaQuery((theme) => theme.breakpoints.only('lg'));
+  const numberOfMovies = lg ? 16 : 18;
+
   if (isFetching) {
     return (
       <Box display="flex" justifyContent="center">
         <CircularProgress
           size="4rem"
           sx={{
-            color: '#ff0072',
             marginTop: '30px',
           }}
         />
@@ -47,7 +50,7 @@ function Movies() {
   if (error) {
     return (
       <Box display="flex" alignItems="center" justifyContent="center">
-        <Button startIcon={<ArrowBack />} onClick={() => Navigate(-1)} color="primary">
+        <Button startIcon={<ArrowBack />} onClick={() => navigate(-1)} color="primary">
           Go Back
         </Button>
       </Box>
@@ -56,7 +59,8 @@ function Movies() {
 
   return (
     <div>
-      <MovieList movies={data} />
+      <MovieList movies={data} numberOfMovies={numberOfMovies} />
+      <Pagination currentPage={page} setPage={setPage} totalPages={data.total_pages} />{' '}
     </div>
   );
 }

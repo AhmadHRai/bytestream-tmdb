@@ -49,7 +49,6 @@ function NavBar() {
             justifyContent: 'space-between',
             marginLeft: { sm: '240px' },
             flexWrap: { xs: 'wrap', sm: 'nowrap' },
-            backgroundColor: '#ff0072',
           }}
         >
           {isMobile && (

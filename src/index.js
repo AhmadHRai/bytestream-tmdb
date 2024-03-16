@@ -7,7 +7,13 @@ import { Provider } from 'react-redux';
 import App from './components/App';
 import store from './app/store';
 
-const theme = createTheme({});
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#ff0072',
+    },
+  },
+});
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

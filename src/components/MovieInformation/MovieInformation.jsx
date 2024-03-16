@@ -20,7 +20,7 @@ import {
   Remove,
   ArrowBack,
 } from '@mui/icons-material';
-import { Link, Navigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { useTheme } from '@mui/material/styles';
@@ -32,7 +32,7 @@ import genreIcons from '../../assets/genres';
 
 function MovieInformation() {
   const theme = useTheme();
-
+  const navigate = useNavigate();
   const { id } = useParams();
   const { data, error, isFetching } = useGetMovieQuery(id);
   const dispatch = useDispatch();
@@ -49,12 +49,7 @@ function MovieInformation() {
   if (isFetching) {
     return (
       <Box display="flex" alignItems="center" justifyContent="center" height="100vh">
-        <CircularProgress
-          size="8rem"
-          sx={{
-            color: '#ff0072',
-          }}
-        />
+        <CircularProgress size="8rem" />
       </Box>
     );
   }
@@ -62,7 +57,7 @@ function MovieInformation() {
   if (error) {
     return (
       <Box display="flex" alignItems="center" justifyContent="center">
-        <Button startIcon={<ArrowBack />} onClick={() => Navigate(-1)} color="primary">
+        <Button startIcon={<ArrowBack />} onClick={() => navigate(-1)} color="primary">
           Go Back
         </Button>
       </Box>
