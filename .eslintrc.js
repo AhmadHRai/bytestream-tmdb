@@ -35,5 +35,7 @@ module.exports = {
     'no-array-index-key': 0,
     camelcase: 0,
     'comma-dangle': 0,
+    'implicit-arrow-linebreak': 0,
+    'operator-linebreak': 0,
   },
 };

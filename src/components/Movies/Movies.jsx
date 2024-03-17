@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Box, CircularProgress, useMediaQuery, Typography, Button } from '@mui/material';
 import { useSelector } from 'react-redux';
 
@@ -6,7 +6,6 @@ import { ArrowBack } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { useGetMoviesQuery } from '../../services/TMDB';
 import { MovieList, Pagination } from '../index';
-import { selectGenreOrCategory } from '../../features/currentGenreOrCategory';
 
 function Movies() {
   const navigate = useNavigate();
