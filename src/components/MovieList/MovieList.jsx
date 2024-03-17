@@ -3,7 +3,8 @@ import { Grid } from '@mui/material';
 
 import { Movie } from '../index';
 
-function MovieList({ movies, numberOfMovies }) {
+function MovieList({ movies, numberOfMovies, excludeFirst }) {
+  const startFrom = excludeFirst ? 1 : 0;
   return (
     <Grid
       container
@@ -14,7 +15,7 @@ function MovieList({ movies, numberOfMovies }) {
         overflow: 'auto',
       }}
     >
-      {movies.results.slice(0, numberOfMovies).map((movie, i) => (
+      {movies.results.slice(startFrom, numberOfMovies).map((movie, i) => (
         <Movie key={i} movie={movie} i={i} />
       ))}
     </Grid>
