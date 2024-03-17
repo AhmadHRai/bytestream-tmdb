@@ -54,6 +54,11 @@ function MovieInformation() {
   }, [watchlistMovies, data]);
 
   const addToFavorites = async () => {
+    // Check if the user exists
+    if (!user || !user.id) {
+      // If the user does not exist, do nothing and return
+      return;
+    }
     await axios.post(
       `https://api.themoviedb.org/3/account/${user.id}/favorite?api_key=${
         process.env.REACT_APP_TMDB_KEY
@@ -69,6 +74,11 @@ function MovieInformation() {
   };
 
   const addToWatchList = async () => {
+    // Check if the user exists
+    if (!user || !user.id) {
+      // If the user does not exist, do nothing and return
+      return;
+    }
     await axios.post(
       `https://api.themoviedb.org/3/account/${user.id}/watchlist?api_key=${
         process.env.REACT_APP_TMDB_KEY
