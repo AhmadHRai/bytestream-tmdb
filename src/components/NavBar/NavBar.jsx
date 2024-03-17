@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { AppBar, IconButton, Toolbar, Drawer, Button, Avatar, useMediaQuery, Box } from '@mui/material';
 import { Menu, AccountCircle } from '@mui/icons-material';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
@@ -10,6 +10,7 @@ import { useTheme } from '@mui/material/styles';
 import { Search, Sidebar } from '../index';
 import { setUser } from '../../features/auth';
 import { fetchToken, createSessionId, moviesApi } from '../../utils/index';
+import { ColorModeContext } from '../../utils/ToggleColorMode';
 
 function NavBar() {
   const isMobile = useMediaQuery('(max-width:600px)');
@@ -18,6 +19,8 @@ function NavBar() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
 
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const colorMode = useContext(ColorModeContext);
 
   const token = localStorage.getItem('request_token');
   const sessionIdFromLocalStorage = localStorage.getItem('session_id');
@@ -41,7 +44,7 @@ function NavBar() {
 
   return (
     <>
-      <AppBar position="fixed" sx={{ backgroundColor: '#ff0072' }}>
+      <AppBar position="fixed">
         <Toolbar
           sx={{
             height: '70px',
@@ -65,7 +68,7 @@ function NavBar() {
               <Menu />
             </IconButton>
           )}
-          <IconButton color="inherit" sx={{ ml: 1 }} onClick={() => {}}>
+          <IconButton color="inherit" sx={{ ml: 1 }} onClick={colorMode.toggleColorMode}>
             {theme.palette.mode === 'dark' ? <DarkModeIcon /> : <LightModeIcon />}
           </IconButton>
           {!isMobile && <Search />}

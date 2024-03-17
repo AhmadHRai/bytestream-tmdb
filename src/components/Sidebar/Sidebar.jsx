@@ -54,7 +54,7 @@ function Sidebar({ setMobileOpen }) {
               <ListItemIcon>
                 <img
                   src={genreIcons[label.toLowerCase()]}
-                  style={{ filter: theme.palette.mode === 'light' ? 'dark' : 'invert(1)' }}
+                  style={{ filter: theme.palette.mode === 'light' ? '' : 'invert(1)' }}
                   height={30}
                 />
               </ListItemIcon>
@@ -68,11 +68,7 @@ function Sidebar({ setMobileOpen }) {
         <ListSubheader>Genres</ListSubheader>
         {isFetching ? (
           <Box display="flex" justifyContent="center">
-            <CircularProgress
-              sx={{
-                color: '#ff0072',
-              }}
-            />
+            <CircularProgress size="4rem" />
           </Box>
         ) : (
           data.genres.map(({ name, id }) => (
@@ -81,7 +77,7 @@ function Sidebar({ setMobileOpen }) {
                 <ListItemIcon>
                   <img
                     src={genreIcons[name.toLowerCase()]}
-                    style={{ filter: theme.palette.mode === 'light' ? 'dark' : 'invert(1)' }}
+                    style={{ filter: theme.palette.mode === 'light' ? '' : 'invert(1)' }}
                     height={30}
                   />
                 </ListItemIcon>

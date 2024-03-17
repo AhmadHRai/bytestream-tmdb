@@ -1,6 +1,6 @@
 /* For Firefox */
 html {
-  scrollbar-color: #ff4599 #ffb2d5; /* thumb color, track color */
+  scrollbar-color: #a5a5a5 #cfcfcf; /* thumb color, track color */
   scrollbar-width: thin; /* or 'auto' for the standard width */
 }
 
@@ -9,11 +9,11 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: #ffb2d5;
+  background: #cfcfcf;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #ff4599;
+  background: #a5a5a5;
 }
 
 * {
