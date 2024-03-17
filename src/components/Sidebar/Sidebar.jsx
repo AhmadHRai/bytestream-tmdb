@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Box,
   List,
@@ -30,11 +30,15 @@ function Sidebar({ setMobileOpen }) {
 
   const dispatch = useDispatch();
   const selectedGenreOrCategory = useSelector((state) => state.currentGenreOrCategory.genreIdOrCategoryName);
-  // const { genreIdOrCategoryName } = useSelector((state) => state.currentGenreOrCategory);
+  const { genreIdOrCategoryName } = useSelector((state) => state.currentGenreOrCategory);
 
   const handleSelect = (value) => {
     dispatch(selectGenreOrCategory(value));
   };
+
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [genreIdOrCategoryName]);
 
   return (
     <>
