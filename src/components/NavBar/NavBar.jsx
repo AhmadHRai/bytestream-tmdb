@@ -1,19 +1,28 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { AppBar, IconButton, Toolbar, Drawer, Button, Avatar, useMediaQuery, Box } from '@mui/material';
-import { Menu, AccountCircle } from '@mui/icons-material';
-import DarkModeIcon from '@mui/icons-material/DarkMode';
-import LightModeIcon from '@mui/icons-material/LightMode';
-import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { useTheme } from '@mui/material/styles';
+import React, { useState, useEffect, useContext } from "react";
+import {
+  AppBar,
+  IconButton,
+  Toolbar,
+  Drawer,
+  Button,
+  Avatar,
+  useMediaQuery,
+  Box,
+} from "@mui/material";
+import { Menu, AccountCircle } from "@mui/icons-material";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useTheme } from "@mui/material/styles";
 
-import { Search, Sidebar } from '../index';
-import { setUser } from '../../features/auth';
-import { fetchToken, createSessionId, moviesApi } from '../../utils/index';
-import { ColorModeContext } from '../../utils/ToggleColorMode';
+import { Search, Sidebar } from "../index";
+import { setUser } from "../../features/auth";
+import { fetchToken, createSessionId, moviesApi } from "../../utils/index";
+import { ColorModeContext } from "../../utils/ToggleColorMode";
 
 function NavBar() {
-  const isMobile = useMediaQuery('(max-width:600px)');
+  const isMobile = useMediaQuery("(max-width:600px)");
   const theme = useTheme();
   const dispatch = useDispatch();
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -22,18 +31,22 @@ function NavBar() {
 
   const colorMode = useContext(ColorModeContext);
 
-  const token = localStorage.getItem('request_token');
-  const sessionIdFromLocalStorage = localStorage.getItem('session_id');
+  const token = localStorage.getItem("request_token");
+  const sessionIdFromLocalStorage = localStorage.getItem("session_id");
 
   useEffect(() => {
     const logInUser = async () => {
       if (token) {
         if (sessionIdFromLocalStorage) {
-          const { data: userData } = await moviesApi.get(`/account?session_id=${sessionIdFromLocalStorage}`);
+          const { data: userData } = await moviesApi.get(
+            `/account?session_id=${sessionIdFromLocalStorage}`
+          );
           dispatch(setUser(userData));
         } else {
           const sessionId = await createSessionId();
-          const { data: userData } = await moviesApi.get(`/account?session_id=${sessionId}`);
+          const { data: userData } = await moviesApi.get(
+            `/account?session_id=${sessionId}`
+          );
           dispatch(setUser(userData));
         }
       }
@@ -47,34 +60,46 @@ function NavBar() {
       <AppBar position="fixed">
         <Toolbar
           sx={{
-            height: '70px',
-            display: 'flex',
-            justifyContent: 'space-between',
-            marginLeft: { sm: '240px' },
-            flexWrap: { xs: 'wrap', sm: 'nowrap' },
+            height: "70px",
+            display: "flex",
+            justifyContent: "space-between",
+            marginLeft: { sm: "240px" },
+            flexWrap: { xs: "wrap", sm: "nowrap" },
           }}
         >
           {isMobile && (
             <IconButton
               color="inherit"
               edge="start"
-              style={{ outline: 'none' }}
+              style={{ outline: "none" }}
               onClick={() => setMobileOpen((prevMobileOpen) => !prevMobileOpen)}
               sx={{
                 marginRight: 2, // Equivalent to theme.spacing(2)
-                display: { xs: 'block', sm: 'none' }, // Display block on xs and none on sm and up
+                display: { xs: "block", sm: "none" }, // Display block on xs and none on sm and up
               }}
             >
               <Menu />
             </IconButton>
           )}
-          <IconButton color="inherit" sx={{ ml: 1 }} onClick={colorMode.toggleColorMode}>
-            {theme.palette.mode === 'dark' ? <DarkModeIcon /> : <LightModeIcon />}
+          <IconButton
+            color="inherit"
+            sx={{ ml: 1 }}
+            onClick={colorMode.toggleColorMode}
+          >
+            {theme.palette.mode === "dark" ? (
+              <LightModeIcon />
+            ) : (
+              <DarkModeIcon />
+            )}
           </IconButton>
           {!isMobile && <Search />}
           <div>
             {!isAuthenticated ? (
-              <Button color="inherit" onClick={fetchToken} sx={{ display: 'flex', alignItems: 'center' }}>
+              <Button
+                color="inherit"
+                onClick={fetchToken}
+                sx={{ display: "flex", alignItems: "center" }}
+              >
                 <span>Login</span> <AccountCircle />
               </Button>
             ) : (
@@ -83,14 +108,16 @@ function NavBar() {
                 component={Link}
                 to={`/profile/${user.id}`}
                 sx={{
-                  '&:hover': {
-                    color: 'white !important',
-                    textDecoration: 'none',
+                  "&:hover": {
+                    color: "white !important",
+                    textDecoration: "none",
                   },
                 }}
                 onClick={() => {}}
               >
-                {!isMobile && <span style={{ whiteSpace: 'nowrap' }}>My Movies &nbsp;</span>}
+                {!isMobile && (
+                  <span style={{ whiteSpace: "nowrap" }}>My Movies &nbsp;</span>
+                )}
                 <Avatar
                   style={{ width: 30, height: 30 }}
                   alt="Profile"
@@ -106,7 +133,7 @@ function NavBar() {
         <Box
           component="nav"
           sx={{
-            width: { sm: '240px', xs: '100%' },
+            width: { sm: "240px", xs: "100%" },
             flexShrink: 0,
           }}
         >
@@ -118,7 +145,7 @@ function NavBar() {
               onClose={() => setMobileOpen((prevMobileOpen) => !prevMobileOpen)}
               PaperProps={{
                 sx: {
-                  width: '240px',
+                  width: "240px",
                 },
               }}
               ModalProps={{ keepMounted: true }}
@@ -130,7 +157,7 @@ function NavBar() {
               variant="permanent"
               open
               PaperProps={{
-                width: '240px',
+                width: "240px",
               }}
             >
               <Sidebar setMobileOpen={setMobileOpen} />

@@ -3,6 +3,7 @@ import { CssBaseline } from '@mui/material';
 import { Route, Routes } from 'react-router-dom';
 
 import { Actors, MovieInformation, Movies, NavBar, Profile } from './index';
+import Footer from './Footer/Footer';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route exact path="/profile/:id" element={<Profile />} />
         </Routes>
       </main>
+      <Footer />
     </div>
   );
 }
