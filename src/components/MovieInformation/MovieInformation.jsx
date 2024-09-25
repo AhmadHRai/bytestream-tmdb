@@ -40,7 +40,7 @@ function MovieInformation() {
     sessionId: localStorage.getItem('session_id'),
     page: 1,
   });
-  const { data: recommendations } = useGetRecommendationsQuery({ list: '/recommendations', movie_id: id });
+  const { data: recommendations } = useGetRecommendationsQuery({ list: 'recommendations', movie_id: id });
 
   const [open, setOpen] = useState(false);
   const [isMovieFavorited, setIsMovieFavorited] = useState(false);
